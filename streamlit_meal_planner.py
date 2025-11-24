@@ -12,7 +12,6 @@ import json
 from dataclasses import dataclass
 from typing import List, Literal, Tuple, Dict, Optional
 from openai import OpenAI
-from dotenv import load_dotenv
 import plotly.graph_objects as go
 import plotly.express as px
 
