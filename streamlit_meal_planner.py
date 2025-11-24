@@ -344,7 +344,6 @@ def build_advanced_prompt(
 
 @st.cache_resource
 def get_openai_client():
-    load_dotenv()
     api_key = st.secrets["OPENAI_API_KEY"]
     if not api_key:
         st.error("❌ OPENAI_API_KEY 환경변수 필요")
