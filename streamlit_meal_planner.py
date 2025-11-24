@@ -351,16 +351,15 @@ def get_openai_client():
     return OpenAI(api_key=api_key)
 
 
-def safe_load_json(json_str):
-    try:
-        return json.loads(json_str)
-    except:
-        # json5는 trailing commas, 누락된 콤마 등 자동 보정
-        try:
-            return json5.loads(json_str)
-        except Exception as e:
-            raise ValueError(f"JSON 파싱 실패: {e}")
-    return safe_load_json(json_str)
+def extract_json(text: str) -> dict:
+    """JSON 추출"""
+    start = text.find("{")
+    end = text.rfind("}") + 1
+    if start == -1 or end == 0:
+        raise ValueError("JSON을 찾을 수 없습니다")
+    
+    json_str = text[start:end]
+    return json.loads(json_str)
     
 
 def generate_meal_plan(
