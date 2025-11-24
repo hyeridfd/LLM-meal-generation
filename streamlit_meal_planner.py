@@ -13,7 +13,6 @@ from dataclasses import dataclass
 from typing import List, Literal, Tuple, Dict, Optional
 from openai import OpenAI
 from dotenv import load_dotenv
-import os
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -315,8 +314,7 @@ def build_meal_planning_prompt(
 @st.cache_resource
 def get_openai_client():
     """OpenAI 클라이언트 (캐시)"""
-    load_dotenv()
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
     if not api_key:
         st.error("❌ OPENAI_API_KEY 환경변수를 설정해주세요")
         st.stop()
